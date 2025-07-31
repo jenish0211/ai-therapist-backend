@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import dotenv from "dotenv";
 import { serve } from "inngest/express";
 import { errorHandler } from "./middleware/errorHandler";
 import { logger } from "./utils/logger";
@@ -14,6 +15,9 @@ import { inngest } from "./inngest/client";
 import { functions as inngestFunctions } from "./inngest/functions";
 // Create Express app
 const app = express();
+
+// Load environment variables
+dotenv.config();
 
 // Middleware
 app.use(helmet()); // Security headers
