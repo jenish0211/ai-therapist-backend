@@ -1,12 +1,22 @@
 import mongoose from 'mongoose';
-import {logger} from './logger';
+import dotenv from 'dotenv';
+import { logger } from './logger';
 
-const MONGODB_URI = process.env.MONGODB_URI || '';
+dotenv.config();
+
+const MONGODB_URI = process.env.MONGODB_URI;
 
 export const connectDB = async () => {
+  if (!MONGODB_URI) {
+    logger.error(" MONGODB_URI is not defined in .env");
+    process.exit(1);
+  }
+
   try {
-    await mongoose.connect(MONGODB_URI);
-    logger.info('Connected to MongoDB');
+    await mongoose.connect(MONGODB_URI, {
+      dbName: 'ai-therapist',
+    });
+    logger.info(' Connected to MongoDB');
   } catch (error) {
     logger.error('Error connecting to MongoDB:', error);
     process.exit(1); 

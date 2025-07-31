@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-import dotenv from "dotenv";
 import { serve } from "inngest/express";
 import { errorHandler } from "./middleware/errorHandler";
 import { logger } from "./utils/logger";
@@ -13,10 +12,6 @@ import activityRouter from "./routes/activity";
 import { connectDB } from "./utils/db";
 import { inngest } from "./inngest/client";
 import { functions as inngestFunctions } from "./inngest/functions";
-
-// Load environment variables
-dotenv.config();
-
 // Create Express app
 const app = express();
 
